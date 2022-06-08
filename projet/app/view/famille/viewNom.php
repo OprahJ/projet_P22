@@ -8,7 +8,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
   <div class="container">
       <?php
       include $root . '/app/view/fragment/fragmentCaveMenu.html';
-      include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
+      include $root . '/app/view/fragment/fragmentGeneJumbotron.php';
 
       // $results contient un tableau avec la liste des clés.
       ?>
@@ -17,7 +17,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       <div class="form-group">
         <input type="hidden" name='action' value='famReadOne'>
        
-        <label for="nom">Nom : </label> <select class="form-control" id='id' name='nom' style="width: 100px">
+        <label for="nom">Nom : </label> <select class="form-control" id='id' name='nom' style="width: 200px">
             <?php
             foreach ($results as $nom) {
              echo ("<option>$nom</option>");

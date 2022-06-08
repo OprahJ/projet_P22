@@ -67,7 +67,7 @@ class ModelFamille {
  public static function getAll() {
   try {
    $database = Model::getInstance();
-   $query = "select * from famille";
+   $query = "select * from famille order by id";
    $statement = $database->prepare($query);
    $statement->execute();
    $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelFamille");
@@ -139,6 +139,24 @@ class ModelFamille {
   return null;
  }
 
+ 
+ public static function Id($nom){
+     try{
+         $database = Model::getInstance();
+         $query = "select * from famille where nom= :nom";
+         $statement = $database->prepare($query);
+         $statement->execute(['nom' => $nom]);
+         $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelFamille");
+         foreach ($results as $element){
+             $id = $element->getId();
+         }
+         return $id;
+     }
+     catch(PDOException $e){
+         printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+         return NULL;
+     }
+ }
 }
 ?>
 <!-- ----- fin ModelFamille -->

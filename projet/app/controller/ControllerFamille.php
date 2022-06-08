@@ -1,5 +1,6 @@
-!-- ----- debut ControllerFamille-->
+<!-- ----- debut ControllerFamille-->
 <?php
+session_start();
 require_once '../model/ModelFamille.php';
 
 class ControllerFamille {
@@ -38,11 +39,11 @@ class ControllerFamille {
  // Affiche une famille particulière (nom)
  public static function famReadOne() {
   $fam_nom = $_GET['nom'];
-  $results = ModelFamille::getOne($fam_nom);
-
+  $_SESSION['famille'] = $fam_nom;
+  $_SESSION['id'] = ModelFamille::Id($_SESSION['famille']);
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/famille/viewAll.php';
+  $vue = $root . '/app/view/famille/viewSelect.php';
   require ($vue);
  }
 
@@ -61,6 +62,8 @@ class ControllerFamille {
   $results = ModelFamille::insert(
       htmlspecialchars($_GET['nom'])
   );
+  $_SESSION['famille'] = $_GET['nom'];
+  $_SESSION['id'] = ModelFamille::Id($_SESSION['famille']);
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/famille/viewInserted.php';
