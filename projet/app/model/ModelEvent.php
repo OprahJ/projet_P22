@@ -89,7 +89,7 @@ class ModelEvent {
             $id = $tuple['0'];
             $id++;
             
-            $query = "insert into evenement value(:famille, :id, :iid, :type, :date, :lieu";
+            $query = "insert into evenement value (:famille, :id, :iid, :type, :date, :lieu)";
             $statement = $database->prepare($query);
             $statement->execute([
                 'famille' => $_SESSION['id'],
