@@ -2,6 +2,7 @@
 <!-- ----- debut Router1 -->
 <?php
 require ('../controller/ControllerFamille.php');
+require ('../controller/ControllerEvent.php');
 
 
 // --- récupération de l'action passée dans l'URL
@@ -26,14 +27,9 @@ switch ($action) {
 
 
  case "eventReadAll" :
- case "producteurReadOne" :
- case "producteurReadId" :
- case "producteurCreate" :
- case "producteurCreated" :
- case "producteurOnlyRegion" :
- case "producteurNombre":
-     
-  ControllerEvenement::$action();
+ case "eventInsert" :
+ case "eventInserted" : 
+  ControllerEvent::$action();
   break;
 
 
