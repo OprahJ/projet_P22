@@ -140,17 +140,17 @@ class ModelFamille {
  }
 
  
- public static function Id($nom){
+ public static function Id($id){
      try{
          $database = Model::getInstance();
-         $query = "select * from famille where nom= :nom";
+         $query = "select * from famille where id = :id";
          $statement = $database->prepare($query);
-         $statement->execute(['nom' => $nom]);
+         $statement->execute(['id' => $id]);
          $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelFamille");
          foreach ($results as $element){
-             $id = $element->getId();
+             $nom = $element->getNom();
          }
-         return $id;
+         return $nom;
      }
      catch(PDOException $e){
          printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());

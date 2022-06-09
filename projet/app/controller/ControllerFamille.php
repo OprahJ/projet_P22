@@ -27,7 +27,7 @@ class ControllerFamille {
  // Affiche un formulaire pour sélectionner un nom qui existe
  public static function famReadNom() {
      
-  $results = ModelFamille::getAllNom();
+  $results = ModelFamille::getAll();
 
 
   // ----- Construction chemin de la vue
@@ -39,8 +39,8 @@ class ControllerFamille {
  // Affiche une famille particulière (nom)
  public static function famReadOne() {
   $fam_nom = $_GET['nom'];
-  $_SESSION['famille'] = $fam_nom;
-  $_SESSION['id'] = ModelFamille::Id($_SESSION['famille']);
+  $_SESSION['id'] = $fam_nom;
+  $_SESSION['famille'] = ModelFamille::Id($_SESSION['id']);
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/famille/viewSelect.php';
@@ -63,7 +63,7 @@ class ControllerFamille {
       htmlspecialchars($_GET['nom'])
   );
   $_SESSION['famille'] = $_GET['nom'];
-  $_SESSION['id'] = ModelFamille::Id($_SESSION['famille']);
+  $_SESSION['id'] = $results;
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/famille/viewInserted.php';
