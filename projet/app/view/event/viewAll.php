@@ -1,10 +1,10 @@
 <?php
-require ($root . '/app/view/fragment/fragmentCaveHeader.html');
+require ($root . '/app/view/fragment/fragmentGeneHeader.html');
 ?>
 <body>
     <div class="container">
         <?php
-        include $root . '/app/view/fragment/fragmentCaveMenu.html';
+        include $root . '/app/view/fragment/fragmentGeneMenu.html';
         include $root . '/app/view/fragment/fragmentGeneJumbotron.php';
         ?>
         <table class="table table-bordered table-striped">

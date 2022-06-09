@@ -1,5 +1,5 @@
 
-<!-- ----- debut fragmentCaveJumbotron -->
+<!-- ----- debut fragmentGeneJumbotron -->
 
 <div class="jumbotron">
     <?php
@@ -7,11 +7,11 @@
         echo("<h1>Pas de famille sélectionnée</h1>");
     }
     else{
-        echo("<h1>$_SESSION[famille]</h1>");
+        echo("<h1>Famille $_SESSION[famille]</h1>");
     }
     ?>
 </div>
  
  
 
-<!-- ----- fin fragmentCaveJumbotron -->
+<!-- ----- fin fragmentGeneJumbotron -->

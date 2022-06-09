@@ -81,6 +81,7 @@ class ModelEvent {
 
     public static function insert($iid, $event_type, $event_date, $event_lieu) {
         try {
+            
             $database = Model::getInstance();
             $query = "select max(id) from evenement";
             $statement = $database->query($query);

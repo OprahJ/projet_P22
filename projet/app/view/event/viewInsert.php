@@ -1,11 +1,11 @@
 <?php
-require ($root . '/app/view/fragment/fragmentCaveHeader.html');
+require ($root . '/app/view/fragment/fragmentGeneHeader.html');
 ?>
 
 <body>
     <div class="container">
         <?php
-        include $root . '/app/view/fragment/fragmentCaveMenu.html';
+        include $root . '/app/view/fragment/fragmentGeneMenu.html';
         include $root . '/app/view/fragment/fragmentGeneJumbotron.php';
         ?>
         <h3>Ajout d'un évènement</h3>
@@ -35,5 +35,5 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
             <button class="btn btn-primary" type='submit'>Go</button>
         </form>
     </div>
-    <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
+    <?php include $root . '/app/view/fragment/fragmentGeneFooter.html'; ?>
 

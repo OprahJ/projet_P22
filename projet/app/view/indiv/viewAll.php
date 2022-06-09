@@ -36,4 +36,3 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
   <!-- ----- fin viewAll -->
   
   
-  

@@ -3,7 +3,7 @@
 <?php
 require ('../controller/ControllerFamille.php');
 require ('../controller/ControllerEvent.php');
-
+require ('../controller/ControllerIndiv.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -17,26 +17,29 @@ $action = htmlspecialchars($param["action"]);
 
 // --- Liste des méthodes autorisées
 switch ($action) {
- case "famReadAll" :
- case "famReadOne" :
- case "famReadNom" :
- case "famCreate" :
- case "famCreated" :
-  ControllerFamille::$action();
-  break;
+    case "famReadAll" :
+    case "famReadOne" :
+    case "famReadNom" :
+    case "famCreate" :
+    case "famCreated" :
+        ControllerFamille::$action();
+        break;
 
+    case "eventReadAll" :
+    case "eventInsert" :
+    case "eventInserted" :
+        ControllerEvent::$action();
+        break;
 
- case "eventReadAll" :
- case "eventInsert" :
- case "eventInserted" : 
-  ControllerEvent::$action();
-  break;
-
-
- // Tache par défaut
- default:
-  $action = "geneAccueil";
-  ControllerFamille::$action();
+    case "indivReadAll":
+    case"indivInsert":
+    case"indivInserted":
+        ControllerIndiv::$action();
+        break;
+    // Tache par défaut
+    default:
+        $action = "geneAccueil";
+        ControllerFamille::$action();
 }
 ?>
 <!-- ----- Fin Router1 -->

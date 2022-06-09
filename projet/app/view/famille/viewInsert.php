@@ -2,13 +2,13 @@
 <!-- ----- début viewInsert -->
  
 <?php 
-require ($root . '/app/view/fragment/fragmentCaveHeader.html');
+require ($root . '/app/view/fragment/fragmentGeneHeader.html');
 ?>
 
 <body>
   <div class="container">
     <?php
-      include $root . '/app/view/fragment/fragmentCaveMenu.html';
+      include $root . '/app/view/fragment/fragmentGeneMenu.html';
       include $root . '/app/view/fragment/fragmentGeneJumbotron.php';
     ?> 
 
@@ -22,7 +22,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     </form>
     <p/>
   </div>
-  <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
+  <?php include $root . '/app/view/fragment/fragmentGeneFooter.html'; ?>
 
 <!-- ----- fin viewInsert -->
 
