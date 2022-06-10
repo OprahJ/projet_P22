@@ -33,8 +33,8 @@ switch ($action) {
         break;
 
     case "indivReadAll":
-    case"indivInsert":
-    case"indivInserted":
+    case "indivInsert":
+    case "indivInserted":
         ControllerIndiv::$action();
         break;
     

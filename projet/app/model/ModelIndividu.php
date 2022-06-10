@@ -87,8 +87,8 @@ class ModelIndividu {
             return NULL;
         }
     }
-    
-    public static function individuGetAllHomme(){
+
+    public static function individuGetAllHomme() {
         try {
             $database = Model::getInstance();
             $query = "select * from individu where famille_id = :famille and id>0 and sexe='H' order by id";
@@ -101,8 +101,8 @@ class ModelIndividu {
             return NULL;
         }
     }
-    
-    public static function individuGetAllFemme(){
+
+    public static function individuGetAllFemme() {
         try {
             $database = Model::getInstance();
             $query = "select * from individu where famille_id = :famille and id>0 and sexe='F' order by id";
@@ -136,31 +136,56 @@ class ModelIndividu {
     public static function updatePere($id, $pere_id) {
         try {
             $database = Model::getInstance();
-            $query ="update individu set pere = :pere where id = :id and famille_id = :famille";
+            $query = "update individu set pere = :pere where id = :id and famille_id = :famille";
             $statement = $database->prepare($query);
             $nb = $statement->execute([
                 'id' => $id,
                 'pere' => $pere_id,
                 'famille' => $_SESSION['id'],
             ]);
-            return $nb;     
+            return $nb;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
         }
     }
-    
+
     public static function updateMere($id, $mere_id) {
         try {
             $database = Model::getInstance();
-            $query ="update individu set mere = :mere where id = :id and famille_id = :famille";
+            $query = "update individu set mere = :mere where id = :id and famille_id = :famille";
             $statement = $database->prepare($query);
             $nb = $statement->execute([
                 'id' => $id,
                 'mere' => $mere_id,
                 'famille' => $_SESSION['id'],
             ]);
-            return $nb;     
+            return $nb;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    public static function insert($nom, $prenom, $sexe) {
+        try {
+            $database = Model::getInstance();
+            $query = "select max(id) from individu";
+            $statement = $database->query($query);
+            $tuple = $statement->fetch();
+            $id = $tuple['0'];
+            $id++;
+
+            $query = "insert into individu value (:famille, :id, :nom, :prenom, :sexe, 0, 0)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'famille' => $_SESSION['id'],
+                'id' => $id,
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'sexe' => $sexe,
+            ]);
+            return $id;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
