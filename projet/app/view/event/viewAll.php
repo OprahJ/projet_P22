@@ -20,11 +20,12 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
             </thead>
             <tbody>
                 <?php
-                foreach ($results as $element){
+                foreach ($results as $element)
+                {
                     printf("<tr><td>%d</td><td>%d</td><td>%d</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getFamille_id(), $element->getId(), $element->getIid(), $element->getEvent_type(), $element->getEvent_date(), $element->getEvent_lieu());
                 }
                 ?>
             </tbody>
         </table>
     </div>
-
+    <?php include $root . '/app/view/fragment/fragmentGeneFooter.html'; ?>

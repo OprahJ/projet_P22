@@ -4,6 +4,7 @@
 require ('../controller/ControllerFamille.php');
 require ('../controller/ControllerEvent.php');
 require ('../controller/ControllerIndiv.php');
+require ('../controller/ControllerLien.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -35,6 +36,10 @@ switch ($action) {
     case"indivInsert":
     case"indivInserted":
         ControllerIndiv::$action();
+        break;
+    
+    case "lienReadAll":
+        ControllerLien::$action();
         break;
     // Tache par défaut
     default:
