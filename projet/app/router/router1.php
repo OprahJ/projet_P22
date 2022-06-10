@@ -39,6 +39,8 @@ switch ($action) {
         break;
     
     case "lienReadAll":
+    case "lienInsertParent" :
+    case "lienInsertedParent":
         ControllerLien::$action();
         break;
     // Tache par défaut
