@@ -128,5 +128,32 @@ class ModelLien {
             return NULL;
         }
     }
+    
+    public static function insertUnion($iid1, $iid2, $lien_type, $lien_date, $lien_lieu) {
+        try {
+            $database = Model::getInstance();
+            $query = "select max(id) from lien";
+            $statement = $database->query($query);
+            $tuple = $statement->fetch();
+            $id = $tuple['0'];
+            $id++;
+
+            $query = "insert into lien(famille_id, id, iid1, iid2, lien_type, lien_date, lien_lieu ) value (:famille, :id, :iid1, :iid2, :type, :date, :lieu)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'famille' => $_SESSION['id'],
+                'id' => $id,
+                'iid1' => $iid1,
+                'iid2' => $iid2,
+                'type' => $lien_type,
+                'date' => $lien_date,
+                'lieu' => $lien_lieu
+            ]);
+            return $id;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
 }

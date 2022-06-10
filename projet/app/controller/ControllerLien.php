@@ -45,4 +45,19 @@ class ControllerLien{
         $vue = $root . '/app/view/lien/viewInsertedParent.php';
         require($vue);
     }
+    
+    public static function lienInsertUnion(){
+        $homme = ModelIndividu::individuGetAllHomme();
+        $femme = ModelIndividu::individuGetAllFemme();
+        include 'config.php';
+        $vue = $root . '/app/view/lien/viewInsertUnion.php';
+        require($vue);
+    }
+    
+    public static function lienInsertedUnion(){
+        $results = ModelLien::insertUnion(htmlspecialchars($_GET['homme']), htmlspecialchars($_GET['femme']), htmlspecialchars($_GET['union']), htmlspecialchars($_GET['date']), htmlspecialchars($_GET['lieu']));
+        include 'config.php';
+        $vue = $root . '/app/view/lien/viewInsertedUnion.php';
+        require($vue);
+    }
 }

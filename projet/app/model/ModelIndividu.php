@@ -87,6 +87,34 @@ class ModelIndividu {
             return NULL;
         }
     }
+    
+    public static function individuGetAllHomme(){
+        try {
+            $database = Model::getInstance();
+            $query = "select * from individu where famille_id = :famille and id>0 and sexe='H' order by id";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille' => $_SESSION['id']]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    public static function individuGetAllFemme(){
+        try {
+            $database = Model::getInstance();
+            $query = "select * from individu where famille_id = :famille and id>0 and sexe='F' order by id";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille' => $_SESSION['id']]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
     public static function sexe($id) {
         try {
