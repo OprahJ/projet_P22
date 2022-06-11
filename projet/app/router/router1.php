@@ -15,7 +15,8 @@ parse_str($query_string, $param);
 
 // --- $action contient le nom de la méthode statique recherchée
 $action = htmlspecialchars($param["action"]);
-
+unset($param['action']);
+$args =$param;
 // --- Liste des méthodes autorisées
 switch ($action) {
     case "famReadAll" :
@@ -29,15 +30,17 @@ switch ($action) {
     case "eventReadAll" :
     case "eventInsert" :
     case "eventInserted" :
-        ControllerEvent::$action();
+        ControllerEvent::$action($args);
         break;
 
     case "indivReadAll":
     case "indivInsert":
     case "indivInserted":
-        ControllerIndiv::$action();
+    case"indivSelect":
+    case"indivInfo":
+        ControllerIndiv::$action($args);
         break;
-    
+
     case "lienReadAll":
     case "lienInsertParent" :
     case "lienInsertedParent":

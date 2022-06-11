@@ -105,5 +105,21 @@ class ModelEvent {
             return -1;
         }
     }
-
+ 
+   
+     
+        public static function eventGetOne($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from evenement where famille_id = :famille and id=:id";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille' => $_SESSION['id'],
+                'id'=> $id]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelEvent");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 }

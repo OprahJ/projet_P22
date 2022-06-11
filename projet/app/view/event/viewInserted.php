@@ -1,3 +1,4 @@
+<!-- Debut de viewInserted -->
 <?php
 require ($root . '/app/view/fragment/fragmentGeneHeader.html');
 ?>
@@ -21,3 +22,4 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
         ?>
     </div>
     <?php include $root . '/app/view/fragment/fragmentGeneFooter.html'; ?>
+   <!-- Fin de viewInserted -->

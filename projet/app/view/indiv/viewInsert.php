@@ -17,7 +17,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
                 <input type="hidden" name='action' value='indivInserted'>        
                 <h3>Création d'un invidu</h3>
                 <label for="nom">Nom ? </label><br>
-                <input type="text" name='nom' id="nom" size='75' placeholder="HALLIDAY" required>                           
+                <input type="text" name='nom' id="nom" size='75' placeholder="" required>                           
                 </br>    
                 <label for="prenom">Prenom : </label><br>
                 <input type="text" name='prenom' id="prenom" size='75' required>   

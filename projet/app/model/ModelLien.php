@@ -87,7 +87,21 @@ class ModelLien {
             return NULL;
         }
     }
-
+  public static function lienGetOne($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from lien where famille_id = :famille and (iid1=:id or iid2=:id)";
+            //$query = "select * from lien where famille_id = :famille and iid1=:id";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille' => $_SESSION['id'],
+                    'id'=>$id]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelLien");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
     public static function insertParent($iid1, $iid2, $lien_type) {
         try {
             $database = Model::getInstance();

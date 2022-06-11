@@ -87,6 +87,20 @@ class ModelIndividu {
             return NULL;
         }
     }
+    
+    public static function individuGetOne($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from individu where famille_id = :famille and id=:id";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille' => $_SESSION['id'], 'id' => $id]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
     public static function individuGetAllHomme() {
         try {
@@ -101,7 +115,9 @@ class ModelIndividu {
             return NULL;
         }
     }
-
+    
+    
+    
     public static function individuGetAllFemme() {
         try {
             $database = Model::getInstance();
@@ -190,6 +206,9 @@ class ModelIndividu {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
         }
-    }
+   }
+
+        
+    
 
 }
