@@ -87,14 +87,15 @@ class ModelLien {
             return NULL;
         }
     }
-  public static function lienGetOne($id) {
+
+    public static function lienGetOne($id) {
         try {
             $database = Model::getInstance();
             $query = "select * from lien where famille_id = :famille and (iid1=:id or iid2=:id)";
             //$query = "select * from lien where famille_id = :famille and iid1=:id";
             $statement = $database->prepare($query);
             $statement->execute(['famille' => $_SESSION['id'],
-                    'id'=>$id]);
+                'id' => $id]);
             $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelLien");
             return $results;
         } catch (PDOException $e) {
@@ -102,11 +103,13 @@ class ModelLien {
             return NULL;
         }
     }
+
     public static function insertParent($iid1, $iid2, $lien_type) {
         try {
             $database = Model::getInstance();
-            $query = "select max(id) from lien";
-            $statement = $database->query($query);
+            $query = "select max(id) from lien where famille_id=:famille";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille'=>$_SESSION['id']]);
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
@@ -142,12 +145,13 @@ class ModelLien {
             return NULL;
         }
     }
-    
+
     public static function insertUnion($iid1, $iid2, $lien_type, $lien_date, $lien_lieu) {
         try {
             $database = Model::getInstance();
-            $query = "select max(id) from lien";
-            $statement = $database->query($query);
+            $query = "select max(id) from lien where famille_id=:famille";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille'=>$_SESSION['id']]);
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
@@ -163,6 +167,26 @@ class ModelLien {
                 'date' => $lien_date,
                 'lieu' => $lien_lieu
             ]);
+            return $id;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    public static function updateParent($iid1, $iid2, $lien_type) {
+        try {
+            $database = Model::getInstance();
+            $query = "update lien set iid2=:iid2 where famille_id=:famille and iid1=:iid1 and lien_type=:lien";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille'=>$_SESSION['id'], 'iid2'=>$iid2, 'iid1'=>$iid1, 'lien'=>$lien_type ]);
+            $query2 = "select id from lien where famille_id = :famille and iid1 = :iid1 and lien_type = :lien";
+            $statement2 = $database->prepare($query2);
+            $statement2->execute(['famille' => $_SESSION['id'], 'iid1' => $iid1, 'lien' => $lien_type]);
+            $results = $statement2->fetchAll(PDO::FETCH_CLASS, "ModelLien");
+            foreach($results as $element){
+                $id=$element->getId();
+            }
             return $id;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());

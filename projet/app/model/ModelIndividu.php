@@ -220,5 +220,45 @@ class ModelIndividu {
             return NULL;
         }
     }
+    
+    public static function testPaternel($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select pere from individu where famille_id = :famille and id=:id";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille' => $_SESSION['id'], 'id' => $id]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
+            $test=1;
+            foreach($results as $element){
+                if($element->getPere()==0){
+                    $test=0;
+                }
+            }
+            return $test;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    public static function testMaternel($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select mere from individu where famille_id = :famille and id=:id";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille' => $_SESSION['id'], 'id' => $id]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
+            $test=1;
+            foreach($results as $element){
+                if($element->getMere()==0){
+                    $test=0;
+                }
+            }
+            return $test;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
 }
