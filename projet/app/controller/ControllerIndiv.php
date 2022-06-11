@@ -46,12 +46,7 @@ class ControllerIndiv {
      $individu = ModelIndividu::individuGetOne($id);
      $pere = ModelIndividu::individuGetOne($individu[0]->getPere());
      $mere = ModelIndividu::individuGetOne($individu[0]->getMere());
-      if (!empty($pere)){
-                 $results2 = '?';
-             }
-       if (!empty($mere)){
-                 $results2 = '?';
-             }
+   
      $event = ModelEvent::eventGetOne($id);
      $lien= ModelLien::lienGetOne($id);
      $union = array();
