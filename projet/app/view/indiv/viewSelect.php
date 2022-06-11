@@ -14,7 +14,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
                 <input type="hidden" name='action' value='indivInfo'>
 
                 <label for="nom">Selection d'un individu : </label>
-                <select class='form-control' id='id' name='nom' style="width: 200px">
+                <select class='form-control' id='nom' name='nom' style="width: 200px">
                     <?php
                     foreach ($results as $element) {
                         echo('<option value='.$element->getId().'> '.$element->getNom().' : '.$element->getPrenom().'</option>');

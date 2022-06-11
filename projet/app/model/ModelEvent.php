@@ -110,7 +110,7 @@ class ModelEvent {
     public static function eventGetOne($id) {
         try {
             $database = Model::getInstance();
-            $query = "select * from evenement where famille_id = :famille and id=:id";
+            $query = "select * from evenement where famille_id = :famille and iid=:id order by event_type";
             $statement = $database->prepare($query);
             $statement->execute(['famille' => $_SESSION['id'],
                 'id' => $id]);

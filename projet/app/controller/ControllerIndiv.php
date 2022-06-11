@@ -46,8 +46,11 @@ class ControllerIndiv {
      $individu = ModelIndividu::individuGetOne($id);
      $pere = ModelIndividu::individuGetOne($individu[0]->getPere());
      $mere = ModelIndividu::individuGetOne($individu[0]->getMere());
-   
-     $event = ModelEvent::eventGetOne($id);
+     
+     // Le eventGetOne récupère la naissance et le déces du perso selectionné
+     $event = ModelEvent::eventGetOne(htmlspecialchars($_GET['nom']));
+     //permet de compter la taille du tableau afin de déterminer les évenements rentrés
+     $taille=count($event);
      $lien= ModelLien::lienGetOne($id);
      $union = array();
      $i = 0;
