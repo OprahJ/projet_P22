@@ -87,7 +87,7 @@ class ModelIndividu {
             return NULL;
         }
     }
-    
+
     public static function individuGetOne($id) {
         try {
             $database = Model::getInstance();
@@ -115,9 +115,7 @@ class ModelIndividu {
             return NULL;
         }
     }
-    
-    
-    
+
     public static function individuGetAllFemme() {
         try {
             $database = Model::getInstance();
@@ -186,8 +184,9 @@ class ModelIndividu {
     public static function insert($nom, $prenom, $sexe) {
         try {
             $database = Model::getInstance();
-            $query = "select max(id) from individu";
-            $statement = $database->query($query);
+            $query = "select max(id) from individu where famille_id=:famille";
+            $statement = $database->prepare($query);
+            $statement->execute(['famille' => $_SESSION['id']]);
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
@@ -206,9 +205,20 @@ class ModelIndividu {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
         }
-   }
+    }
 
-        
-    
+    public static function individu0() {
+        try {
+            $database = Model::getInstance();
+            $query = "insert into individu value (:famille, 0, '?', '?', '?', 0, 0)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'famille' => $_SESSION['id'],
+            ]);
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
 }

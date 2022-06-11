@@ -9,7 +9,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
         include $root . '/app/view/fragment/fragmentGeneMenu.html';
         include $root . '/app/view/fragment/fragmentGeneJumbotron.php';
         ?>  
-        <h3>L'évènement a bien été rajouté</h3>
+        <h3>L'évènement a bien été <?php echo $statut ; ?></h3>
         <?php
         echo("<ul>"
         . "<li>Famille_id = " . $_SESSION['id'] . "</li>"

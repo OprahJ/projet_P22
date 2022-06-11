@@ -2,6 +2,7 @@
 <?php
 session_start();
 require_once '../model/ModelFamille.php';
+require_once '../model/ModelIndividu.php';
 
 class ControllerFamille {
  // --- page d'acceuil
@@ -64,6 +65,8 @@ class ControllerFamille {
   );
   $_SESSION['famille'] = $_GET['nom'];
   $_SESSION['id'] = $results;
+  
+  $individu0 = ModelIndividu::individu0();
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/famille/viewInserted.php';
