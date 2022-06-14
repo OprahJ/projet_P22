@@ -31,10 +31,10 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
         echo('Parents');
         echo('<ul>');
         echo('<li>Pere ');
-        echo('<a href="' . $root . '/app/router/router1.php?action=indivInfo&nom=' . $individu[0]->getPere() . '">' . $pere[0]->getNom() . ' ' . $pere[0]->getPrenom() . '</a>');
+        echo('<a href="../router/router1.php?action=indivInfo&nom=' . $individu[0]->getPere() . '">' . $pere[0]->getNom() . ' ' . $pere[0]->getPrenom() . '</a>');
         echo('</li>');
         echo('<li>Mere ');
-        echo('<a href="' . $root . '/app/router/router1.php?action=indivInfo&nom=' . $individu[0]->getMere() . '">' . $mere[0]->getNom() . ' ' . $mere[0]->getPrenom() . '</a>');
+        echo('<a href="../router/router1.php?action=indivInfo&nom=' . $individu[0]->getMere() . '">' . $mere[0]->getNom() . ' ' . $mere[0]->getPrenom() . '</a>');
         echo('</li>');
         echo('</ul>');
 
@@ -45,7 +45,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
             echo('<li>');
 
             echo('Union avec ');
-            echo('<a href="' . $root . '/app/router/router1.php?action=indivInfo&nom=' . $element[2] . '">' . $element[0] . '</a>');
+            echo('<a href="../router/router1.php?action=indivInfo&nom=' . $element[2] . '">' . $element[0] . '</a>');
 
             if (isset($element[3])) {
                 echo('<ol>');
@@ -53,7 +53,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
                     echo('<li>');
 
                     echo('Enfant ');
-                    echo('<a href="' . $root . '/app/router/router1.php?action=indivInfo&nom=' . $element2[1] . '">' . $element2[0] . '</a>');
+                    echo('<a href="../router/router1.php?action=indivInfo&nom=' . $element2[1] . '">' . $element2[0] . '</a>');
 
                     echo('</li>');
                 }

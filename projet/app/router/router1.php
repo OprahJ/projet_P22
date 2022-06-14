@@ -36,8 +36,8 @@ switch ($action) {
     case "indivReadAll":
     case "indivInsert":
     case "indivInserted":
-    case"indivSelect":
-    case"indivInfo":
+    case "indivSelect":
+    case "indivInfo":
         ControllerIndiv::$action($args);
         break;
 
