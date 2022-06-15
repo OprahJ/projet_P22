@@ -16,7 +16,7 @@ parse_str($query_string, $param);
 // --- $action contient le nom de la méthode statique recherchée
 $action = htmlspecialchars($param["action"]);
 unset($param['action']);
-$args =$param;
+$args = $param;
 // --- Liste des méthodes autorisées
 switch ($action) {
     case "famReadAll" :
@@ -24,6 +24,8 @@ switch ($action) {
     case "famReadNom" :
     case "famCreate" :
     case "famCreated" :
+    case"amelioration" :
+
         ControllerFamille::$action();
         break;
 

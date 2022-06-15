@@ -13,7 +13,14 @@ class ControllerFamille {
    echo ("ControllerFamille : geneAccueil : vue = $vue");
   require ($vue);
  }
-
+ // --- page amelioration
+ public static function amelioration() {
+  include 'config.php';
+  $vue = $root . '/app/view/amelioration.php';
+  if (DEBUG)
+   echo ("ControllerFamille : amelioration : vue = $vue");
+  require ($vue);
+ }
  // --- Liste des familles
  public static function famReadAll() {
   $results = ModelFamille::getAll();
