@@ -12,6 +12,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
         <form method="get" action="router1.php">
             <div class="form-group">
                 <input type="hidden" name="action" value="eventInserted">
+                <!-- Formulaire de selection composé de tout les individus -->
                 <label for="individu">Selectionnez un individu:</label>
                 <select class="form-control" id='individu' name="individu">
                     <?php
@@ -20,12 +21,14 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
                     }
                     ?>
                 </select>
+                <!-- Formulaire de selection d'un evenement -->
                 <label for='evenement'>Selectrionnez un type d'évènement:</label>
                 <select class="form-control" id='evenement' name="evenement">
                     <option>NAISSANCE</option>
                     <option>DECES</option>
                 </select>
             </div>
+            <!--Formulire dans lequel il faut rentrer la date et le lieu-->
             <div class="form-group">
                 <label for="date">Date (AAAA-MM-JJ) ?</label><br>
                 <input type="text" name='date' id='date' style="width: 200px;" required><br>

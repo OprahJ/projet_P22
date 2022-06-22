@@ -19,6 +19,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
                 </tr>
             </thead>
             <tbody>
+                <!--Affichage d'une ligne répondant aux colonnes pour chaque event de la famille -->
                 <?php
                 foreach ($results as $element)
                 {

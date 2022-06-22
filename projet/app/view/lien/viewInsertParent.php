@@ -12,6 +12,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
             <div class="form-group">
                 <input type="hidden" name='action' value="lienInsertedParent">
                 <label for='enfant'>Sélectionnez un enfant:</label>
+                <!-- 2 formulaires de choix composés de tout les individus d'une famille -->
                 <select class="form-control" name="enfant" id='enfant'>
                     <?php
                     foreach ($individu as $element) {

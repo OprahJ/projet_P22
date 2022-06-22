@@ -73,10 +73,12 @@ class ModelIndividu {
     function getMere() {
         return $this->mere;
     }
-
+    
+    //Affichage de tout les individus d'une famille
     public static function individuGetAll() {
         try {
             $database = Model::getInstance();
+            //selection des individus de la famille en excluant l'individu 0 qui n'existe pas IRL
             $query = "select * from individu where famille_id = :famille and id>0 order by id";
             $statement = $database->prepare($query);
             $statement->execute(['famille' => $_SESSION['id']]);
@@ -87,7 +89,7 @@ class ModelIndividu {
             return NULL;
         }
     }
-
+    //Affichage d'un individu en fonction de son id et de sa famille
     public static function individuGetOne($id) {
         try {
             $database = Model::getInstance();
@@ -101,7 +103,8 @@ class ModelIndividu {
             return NULL;
         }
     }
-
+    
+    //Recupération de tout les individus hommes autre que l'individu 0 et ordonne par l'id
     public static function individuGetAllHomme() {
         try {
             $database = Model::getInstance();
@@ -116,6 +119,7 @@ class ModelIndividu {
         }
     }
 
+    //Recupération de tout les individus femmes autre que l'individu 0 et ordonne par l'id
     public static function individuGetAllFemme() {
         try {
             $database = Model::getInstance();
@@ -130,6 +134,7 @@ class ModelIndividu {
         }
     }
 
+    //Recupération du sexe d'un individu en fonction de son id
     public static function sexe($id) {
         try {
             $database = Model::getInstance();
@@ -146,7 +151,8 @@ class ModelIndividu {
             return NULL;
         }
     }
-
+    
+    //Mise a jour de l'id du pere d'un individu
     public static function updatePere($id, $pere_id) {
         try {
             $database = Model::getInstance();
@@ -164,6 +170,7 @@ class ModelIndividu {
         }
     }
 
+    //Mise a jour de l'id de la mere d'un individu
     public static function updateMere($id, $mere_id) {
         try {
             $database = Model::getInstance();
@@ -180,9 +187,10 @@ class ModelIndividu {
             return NULL;
         }
     }
-
+    //Insertion d'un nouvel individu dans la famille
     public static function insert($nom, $prenom, $sexe) {
         try {
+            //Recuperation de l'id max dispo
             $database = Model::getInstance();
             $query = "select max(id) from individu where famille_id=:famille";
             $statement = $database->prepare($query);
@@ -190,7 +198,7 @@ class ModelIndividu {
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
-
+            //Insertion du nouvel individu
             $query = "insert into individu value (:famille, :id, :nom, :prenom, :sexe, 0, 0)";
             $statement = $database->prepare($query);
             $statement->execute([
@@ -207,6 +215,7 @@ class ModelIndividu {
         }
     }
 
+    //Insertion de l'individu 0
     public static function individu0() {
         try {
             $database = Model::getInstance();
@@ -220,7 +229,7 @@ class ModelIndividu {
             return NULL;
         }
     }
-    
+    // Test si un individu a deja un pere 
     public static function testPaternel($id) {
         try {
             $database = Model::getInstance();
@@ -228,6 +237,7 @@ class ModelIndividu {
             $statement = $database->prepare($query);
             $statement->execute(['famille' => $_SESSION['id'], 'id' => $id]);
             $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelIndividu");
+            // si test = 1 alors l'individu a deja un pere si test=0 il n'a pas de pere
             $test=1;
             foreach($results as $element){
                 if($element->getPere()==0){
@@ -241,6 +251,7 @@ class ModelIndividu {
         }
     }
     
+    //meme fonctionnement que test paternel
     public static function testMaternel($id) {
         try {
             $database = Model::getInstance();

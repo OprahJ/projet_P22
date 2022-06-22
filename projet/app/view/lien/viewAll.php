@@ -21,6 +21,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
                 </tr>
             </thead>
             <tbody>
+                <!--Liste des liens stockés dans $results -->
                 <?php
                 foreach ($results as $element)
                 {

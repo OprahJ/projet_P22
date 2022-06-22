@@ -73,7 +73,7 @@ class ModelLien {
     function getLien_lieu() {
         return $this->lien_lieu;
     }
-
+    //Affichage de tout les liens spécifiques à une famille
     public static function lienGetAll() {
         try {
             $database = Model::getInstance();
@@ -87,7 +87,7 @@ class ModelLien {
             return NULL;
         }
     }
-
+    //Affichage d'un lien en fonction de son id spécifique a une famille
     public static function lienGetOne($id) {
         try {
             $database = Model::getInstance();
@@ -104,8 +104,10 @@ class ModelLien {
         }
     }
 
+    //Insertion d'un nouveau lien parent
     public static function insertParent($iid1, $iid2, $lien_type) {
         try {
+            //Selection de l'id max de lien specifique a la famille
             $database = Model::getInstance();
             $query = "select max(id) from lien where famille_id=:famille";
             $statement = $database->prepare($query);
@@ -113,7 +115,8 @@ class ModelLien {
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
-
+            
+            //Insertion du nouveau lien parent
             $query = "insert into lien(famille_id, id, iid1, iid2, lien_type ) value (:famille, :id, :iid1, :iid2, :type)";
             $statement = $database->prepare($query);
             $statement->execute([
@@ -145,9 +148,10 @@ class ModelLien {
             return NULL;
         }
     }
-
+    //Insertion d'un nouvel union specifique à une famille
     public static function insertUnion($iid1, $iid2, $lien_type, $lien_date, $lien_lieu) {
         try {
+            //Selection de l'id max de lien specifique a la famille
             $database = Model::getInstance();
             $query = "select max(id) from lien where famille_id=:famille";
             $statement = $database->prepare($query);
@@ -155,7 +159,8 @@ class ModelLien {
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
-
+            
+            //Insertion du nouveau lien union
             $query = "insert into lien(famille_id, id, iid1, iid2, lien_type, lien_date, lien_lieu ) value (:famille, :id, :iid1, :iid2, :type, :date, :lieu)";
             $statement = $database->prepare($query);
             $statement->execute([
@@ -173,13 +178,16 @@ class ModelLien {
             return NULL;
         }
     }
-
+    
+    //Maj d'un lien parent
     public static function updateParent($iid1, $iid2, $lien_type) {
         try {
             $database = Model::getInstance();
+            //Maj de l'id de la mere ou du pere
             $query = "update lien set iid2=:iid2 where famille_id=:famille and iid1=:iid1 and lien_type=:lien";
             $statement = $database->prepare($query);
             $statement->execute(['famille'=>$_SESSION['id'], 'iid2'=>$iid2, 'iid1'=>$iid1, 'lien'=>$lien_type ]);
+            //recupération de l'id de lupdate
             $query2 = "select id from lien where famille_id = :famille and iid1 = :iid1 and lien_type = :lien";
             $statement2 = $database->prepare($query2);
             $statement2->execute(['famille' => $_SESSION['id'], 'iid1' => $iid1, 'lien' => $lien_type]);

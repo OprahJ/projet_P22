@@ -12,6 +12,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
             <div class="form-group">
                 <input type="hidden" name='action' value="lienInsertedUnion">
                 <label for='homme'>Sélectionnez un Homme:</label>
+                <!-- formulaire select composé que des hommes d'une famille -->
                 <select class="form-control" name="homme" id='homme'>
                     <?php
                     foreach ($homme as $element) {
@@ -19,6 +20,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
                     }
                     ?>
                 </select>
+                <!-- formulaire select composé que des femmes d'une famille -->
                 <label for='femme'>Sélectionnez une femme:</label>
                 <select class="form-control" name="femme" id='femme'>
                     <?php

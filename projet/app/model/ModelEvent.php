@@ -64,10 +64,12 @@ class ModelEvent {
     function getEvent_lieu() {
         return $this->event_lieu;
     }
-
+    
+    //Select de tout les evenements
     public static function eventGetAll() {
         try {
             $database = Model::getInstance();
+            //Selection de tout les évenements specifique de la famille
             $query = "select * from evenement where famille_id = :famille";
             $statement = $database->prepare($query);
             $statement->execute(['famille' => $_SESSION['id']]);
@@ -78,18 +80,21 @@ class ModelEvent {
             return NULL;
         }
     }
-
+    
+    //Insertion d'un évènement
     public static function insert($iid, $event_type, $event_date, $event_lieu) {
         try {
 
             $database = Model::getInstance();
+            //Trouver l'id max pour la famille sélectionnée
             $query = "select max(id) from evenement where famille_id=:famille";
             $statement = $database->prepare($query);
             $statement->execute(['famille' => $_SESSION['id']]);
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
-
+            
+            //Insertion d'un nouvel évènement avec toutes les variables rentrées
             $query = "insert into evenement value (:famille, :id, :iid, :type, :date, :lieu)";
             $statement = $database->prepare($query);
             $statement->execute([
@@ -106,7 +111,8 @@ class ModelEvent {
             return -1;
         }
     }
-
+    
+    //Recuperation d'un evenement en fonction de son id specifique à la famille
     public static function eventGetOne($id) {
         try {
             $database = Model::getInstance();
@@ -122,6 +128,7 @@ class ModelEvent {
         }
     }
 
+    //Permet de tester si un des évènements a déjà été créé pour un individu ou non
     public static function test($iid, $event) {
         try {
             $database = Model::getInstance();
@@ -141,16 +148,19 @@ class ModelEvent {
             return NULL;
         }
     }
-
+    //Maj des events 
     public static function update($iid, $event_type, $event_date, $event_lieu) {
         try {
             $database = Model::getInstance();
+            //Maj de la date
             $query = "update evenement set event_date = :date where iid = :iid and famille_id = :famille and event_type = :event";
             $statement = $database->prepare($query);
             $statement->execute(['date' => $event_date, 'iid' => $iid, 'famille'=>$_SESSION['id'], 'event' => $event_type]);
+            //MAj lieu
             $query3 = "update evenement set event_lieu = :lieu where iid = :iid and famille_id = :famille and event_type = :event";
             $statement3 = $database->prepare($query3);
             $statement3->execute(['lieu' => $event_lieu, 'iid' => $iid, 'famille'=>$_SESSION['id'], 'event' => $event_type]);
+            //Redonner l'id de cet évènement maj
             $query2 = "select id from evenement where famille_id = :famille and iid = :iid and event_type = :event";
             $statement2 = $database->prepare($query2);
             $statement2->execute(['famille' => $_SESSION['id'], 'iid' => $iid, 'event' => $event_type]);

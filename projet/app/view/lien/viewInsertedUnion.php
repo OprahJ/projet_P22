@@ -9,6 +9,7 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
         include $root . '/app/view/fragment/fragmentGeneJumbotron.php';
         ?>  
         <h3>Confirmation de la création d'un lien union : </h3>
+        <!-- Affichage de toute les variables nécessaire à la création du lien union -->
         <?php
         echo("<ul>"
         . "<li>Famille_id = " . $_SESSION['id'] . "</li>"

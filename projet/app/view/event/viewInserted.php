@@ -9,7 +9,9 @@ require ($root . '/app/view/fragment/fragmentGeneHeader.html');
         include $root . '/app/view/fragment/fragmentGeneMenu.html';
         include $root . '/app/view/fragment/fragmentGeneJumbotron.php';
         ?>  
+        <!-- Affichage d'un message en fonction de si c'est un update ou un insert -->
         <h3>L'évènement a bien été <?php echo $statut ; ?></h3>
+        <!-- Affichage de toutes les variables ayant été nécéssaire à l'insertion ou l'update-->
         <?php
         echo("<ul>"
         . "<li>Famille_id = " . $_SESSION['id'] . "</li>"
